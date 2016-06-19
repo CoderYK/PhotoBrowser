@@ -50,6 +50,22 @@ extension HomeViewController {
     }
 }
 
+// MARK:- 实现代理方法,监听 Cell 的点击
+extension HomeViewController {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        //创建图片浏览控制器
+        let browserVc = BrowserViewController()
+        
+        // 设置控制器属性
+        browserVc.indexPath = indexPath
+        browserVc.shops = shops
+        
+        // 弹出控制器
+        presentViewController(browserVc, animated: true, completion: nil)
+    }
+}
+
 // MARK:- 实现collectionView 数据源函数
 extension HomeViewController {
     
