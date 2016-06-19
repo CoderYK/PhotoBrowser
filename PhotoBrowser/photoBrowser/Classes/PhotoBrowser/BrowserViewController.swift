@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class BrowserViewController: UIViewController {
 
@@ -24,8 +25,14 @@ class BrowserViewController: UIViewController {
     // MARK:- 系统回调函数
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 0.设置图片之间的间距
+        view.frame.size.width += 10
         
+        // 1.设置 UI
         setupUI()
+        
+        // 2.滚动到对应的位置
+        collectionView.scrollToItemAtIndexPath(indexPath!, atScrollPosition: .Left, animated: false)
     }
 }
 
@@ -72,7 +79,7 @@ extension BrowserViewController {
     func prepareCollcetionView() {
         collectionView.dataSource = self
         // 注册 Cell  获取某一个类的 class :UICollectionView.self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: browserCellID)
+        collectionView.registerClass(BrowserViewCell.self, forCellWithReuseIdentifier: browserCellID)
     }
 }
 
@@ -91,22 +98,40 @@ extension BrowserViewController {
     }
     
     @objc private func saveBtnClick() {
-        print("保存图片")
+        // 1.取出当前正在显示的图片
+        let cell = collectionView.visibleCells().first as! BrowserViewCell
+        guard let image = cell.imageView.image else {
+            return
+        }
+        
+        // 2.保存图片
+        UIImageWriteToSavedPhotosAlbum(image, self, "image:didFinishSavingWithError:contextInfo:", nil)
+    }
+    
+    //  - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
+    @objc private func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
+        
+        if error != nil {
+            SVProgressHUD.showErrorWithStatus("保存失败")
+            return
+        }
+        
+        SVProgressHUD.showSuccessWithStatus("保存成功")
     }
 }
 
 // MARK:- collectionView的数据源和代理方法
 extension BrowserViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return shops?.count ?? 0    //可选链中 ?? 的作用:如果可选链中没有值,那么直接使用??后面的值
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         // 1.创建 Cell
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(browserCellID, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(browserCellID, forIndexPath: indexPath) as! BrowserViewCell
         
         // 2.设置 Cell 的数据
-        cell.backgroundColor = indexPath.item % 2 == 0 ? UIColor.blueColor() : UIColor.redColor()
+        cell.shop = shops![indexPath.item]
         
         return cell
     }

@@ -13,6 +13,7 @@
 		59CCB6FE1D16744A00D156A4 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB6FD1D16744A00D156A4 /* HomeViewCell.swift */; };
 		59CCB7001D167FE700D156A4 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB6FF1D167FE700D156A4 /* BrowserViewController.swift */; };
 		59CCB7021D16963300D156A4 /* BrowserViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB7011D16963300D156A4 /* BrowserViewFlowLayout.swift */; };
+		59CCB7041D16999600D156A4 /* BrowserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB7031D16999600D156A4 /* BrowserViewCell.swift */; };
 		59D90CFD1D1306FB00AD7B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D90CFC1D1306FB00AD7B94 /* AppDelegate.swift */; };
 		59D90D021D1306FB00AD7B94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59D90D001D1306FB00AD7B94 /* Main.storyboard */; };
 		59D90D041D1306FB00AD7B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59D90D031D1306FB00AD7B94 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		59CCB6FD1D16744A00D156A4 /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		59CCB6FF1D167FE700D156A4 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		59CCB7011D16963300D156A4 /* BrowserViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewFlowLayout.swift; sourceTree = "<group>"; };
+		59CCB7031D16999600D156A4 /* BrowserViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewCell.swift; sourceTree = "<group>"; };
 		59D90CF91D1306FB00AD7B94 /* photoBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59D90CFC1D1306FB00AD7B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59D90D011D1306FB00AD7B94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				59CCB6FF1D167FE700D156A4 /* BrowserViewController.swift */,
 				59CCB7011D16963300D156A4 /* BrowserViewFlowLayout.swift */,
+				59CCB7031D16999600D156A4 /* BrowserViewCell.swift */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			files = (
 				59D90CFD1D1306FB00AD7B94 /* AppDelegate.swift in Sources */,
 				59CCB7001D167FE700D156A4 /* BrowserViewController.swift in Sources */,
+				59CCB7041D16999600D156A4 /* BrowserViewCell.swift in Sources */,
 				59D90D131D130CEF00AD7B94 /* HomeViewController.swift in Sources */,
 				59CCB7021D16963300D156A4 /* BrowserViewFlowLayout.swift in Sources */,
 				59A1EABB1D1387DA0057C894 /* HomeCollectionViewFlowLayout.swift in Sources */,

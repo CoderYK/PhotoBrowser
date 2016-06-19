@@ -14,7 +14,7 @@ class BrowserViewFlowLayout: UICollectionViewFlowLayout {
         super.prepareLayout()
         
         //设置 layout 相关属性
-        itemSize = UIScreen.mainScreen().bounds.size
+        itemSize = (collectionView?.bounds.size)!
         scrollDirection = .Horizontal
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
