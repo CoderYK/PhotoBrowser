@@ -18,16 +18,16 @@ class HomeViewController: UICollectionViewController {
         super.viewDidLoad()
         
         // 加载数据
-        loadData()
+        loadData(0)
     }
     
 }
 
 // MARK:- 网络请求的方法
 extension HomeViewController {
-    func loadData() {
+    func loadData(offset : Int) {
         // 发送网络请求
-        HttpManager.shareInstance.loadHomeData { (resultArray, error) in
+        HttpManager.shareInstance.loadHomeData(offset) {(resultArray, error) in
             // 1.空值校验
             if error != nil {
                 return
@@ -62,6 +62,11 @@ extension HomeViewController {
         
         // 2.给 Cell 设置数据
         cell.shop = self.shops[indexPath.row]
+        
+        // 3.判断是否是最后一个 Cell 出现
+        if indexPath.row == self.shops.count - 1 {
+            loadData(shops.count)
+        }
         
         return cell
     }

@@ -21,9 +21,9 @@ class HttpManager: AFHTTPSessionManager {
     }()
     
     
-    func loadHomeData(finshedCallBack: (resultArray : [[String : NSObject]]?, error : NSError?) -> ()) {
+    func loadHomeData(offset : Int, finshedCallBack: (resultArray : [[String : NSObject]]?, error : NSError?) -> ()) {
         // 1.获取请求的 URLString
-        let urlString = "http://mobapi.meilishuo.com/2.0/twitter/popular.json?offset=0&limit=30&access_token=b92e0c6fd3ca919d3e7547d446d9a8c2"
+        let urlString = "http://mobapi.meilishuo.com/2.0/twitter/popular.json?offset=\(offset)&limit=30&access_token=b92e0c6fd3ca919d3e7547d446d9a8c2"
         
         // 2.发送网络请求
         GET(urlString, parameters: nil, success: { (_, result) -> Void in
