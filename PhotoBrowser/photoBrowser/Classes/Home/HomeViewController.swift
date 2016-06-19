@@ -86,6 +86,10 @@ extension HomeViewController {
         browserVc.indexPath = indexPath
         browserVc.shops = shops
         
+        animateManager.dismissDelegate = browserVc
+        animateManager.presentedDelegate = self
+        animateManager.indexPath = indexPath
+        
         // 设置 browser 的 modal动画
         browserVc.modalPresentationStyle = .Custom
         browserVc.transitioningDelegate = animateManager
@@ -96,6 +100,49 @@ extension HomeViewController {
 }
 
 
+// MARK:- 实现PresentedProtocol方法
+extension HomeViewController : PresentedProtocol {
+    
+    // 1.获取 imageView
+    func getImageView(indexPath: NSIndexPath) -> UIImageView {
+        // 1.创建 imageView
+        let imageView : UIImageView = UIImageView()
+        
+        // 1.1.设置在图片
+        let cell = collectionView?.cellForItemAtIndexPath(indexPath) as! HomeViewCell
+        imageView.image = cell.imageView.image
+        
+        imageView.contentMode = .ScaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
+    
+    // 2.获取开始位置
+    func getStartRect(indexPath: NSIndexPath) -> CGRect {
+        
+        guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? HomeViewCell else {
+            return CGRectZero
+        }
+        
+        // 2.1.将 Cell 的 frame 转换为所在屏幕的 frame
+        let startRect = collectionView!.convertRect(cell.frame, toCoordinateSpace: UIApplication.sharedApplication().keyWindow!)
+        
+        return startRect
+    }
+    
+    // 3.获取结束位置
+    func getEndRect(indexPath: NSIndexPath) -> CGRect {
+        // 3.1.获取当前正在显示的 Cell
+        let cell = collectionView?.cellForItemAtIndexPath(indexPath) as! HomeViewCell
+        
+        // 3.2. 取出 Cell 的 Image
+        let image = cell.imageView.image
+        
+        return calculateImageViewFrame(image!)
+    }
+    
+}
 
 
 

@@ -8,10 +8,25 @@
 
 import UIKit
 
+protocol PresentedProtocol : class {
+    func getImageView(indexPath : NSIndexPath) -> UIImageView
+    func getStartRect(indexPath : NSIndexPath) -> CGRect
+    func getEndRect(indexPath : NSIndexPath) -> CGRect
+    
+}
+
+protocol DismissProtocol : class {
+    func getImageView() -> UIImageView
+    func getIndexPath() -> NSIndexPath
+}
+
 class AnimateManager: NSObject {
     
     var isPresented : Bool = false
+    var indexPath : NSIndexPath?
     
+    weak var presentedDelegate : PresentedProtocol?
+    weak var dismissDelegate : DismissProtocol?
 }
 
 
@@ -48,31 +63,67 @@ extension AnimateManager : UIViewControllerAnimatedTransitioning {
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
         if isPresented {
+            // 0.空值校验
+            guard let indexPath = indexPath, presentedDelegate = presentedDelegate else {
+                return
+            }
             
             // 1.获取弹出的 View
             let presentView = transitionContext.viewForKey(UITransitionContextToViewKey)!
             
-            // 2.将弹出的 View 添加到 containerView 中
-            transitionContext.containerView()?.addSubview(presentView)
-            
             // 3.执行动画
-            presentView.alpha = 0.0
-            let duration = transitionDuration(transitionContext)
-            UIView.animateWithDuration(duration, animations: {
-                presentView.alpha = 1.0
+            // 3.1.获取执行动画的 imageView
+            let imageView = presentedDelegate.getImageView(indexPath)
+            transitionContext.containerView()?.addSubview(imageView)
+            
+            // 3.2.设置 imageView 的起始位置
+            imageView.frame = presentedDelegate.getStartRect(indexPath)
+            
+            // 3.3.执行动画
+            transitionContext.containerView()?.backgroundColor = UIColor.blackColor()
+            UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
+                imageView.frame = presentedDelegate.getEndRect(indexPath)
             }) { (_) in
+                // 将弹出的 View 添加到 containerView 中
+                transitionContext.containerView()?.addSubview(presentView)
+                transitionContext.containerView()?.backgroundColor = UIColor.clearColor()
+                imageView.removeFromSuperview()
+                
                 // 动画完成
                 transitionContext.completeTransition(true)
             }
         } else {
             
+            // 0.空值校验
+            guard let dismissDelegate = dismissDelegate, presentedDelegate = presentedDelegate else {
+                return
+            }
+            
             // 2.1.获取消失的 View
             let dismissView = transitionContext.viewForKey(UITransitionContextFromViewKey)
             
+            
             // 2.3.执行动画
-            let duration = transitionDuration(transitionContext)
-            UIView.animateWithDuration(duration, animations: {
-                dismissView?.alpha = 0.0
+            // 获取执行动画的 imageView
+            let imageView = dismissDelegate.getImageView()
+            transitionContext.containerView()?.addSubview(imageView)
+            
+            // 取出 indexpath
+            let indexPath = dismissDelegate.getIndexPath()
+            
+            // 获取结束的位置
+            let endRect = presentedDelegate.getStartRect(indexPath)
+            
+            dismissView?.alpha = endRect == CGRectZero ? 1.0 : 0.0
+            
+            UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
+                if endRect == CGRectZero {
+                   imageView.removeFromSuperview()
+                    dismissView?.alpha = 0.0
+                } else {
+                imageView.frame = endRect
+                }
+                
             }) { (_) in
                 // 将消失的 View 从containerView中移除
                 dismissView?.removeFromSuperview()

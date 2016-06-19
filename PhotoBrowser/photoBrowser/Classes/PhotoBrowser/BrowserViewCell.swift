@@ -35,7 +35,7 @@ class BrowserViewCell: UICollectionViewCell {
             
             imageView.sd_setImageWithURL(url, placeholderImage: image) { (image, _, _, _) in
                 //重新计算图片的尺寸
-                self.imageView.frame = self.calculateImageViewFrame(image)
+                self.imageView.frame = calculateImageViewFrame(image)
             }
         }
     }
@@ -59,15 +59,3 @@ class BrowserViewCell: UICollectionViewCell {
     
 }
 
-// MARK:- 根据图片计算 imageView 的 frame
-extension BrowserViewCell {
-    func calculateImageViewFrame(image: UIImage) -> CGRect {
-        
-        let imageViewW = UIScreen.mainScreen().bounds.width
-        let imageViewH = imageViewW / image.size.width * image.size.height
-        let x : CGFloat = 0
-        let y = (UIScreen.mainScreen().bounds.height - imageViewH) * 0.5
-        
-        return CGRect(x: x, y: y, width: imageViewW, height: imageViewH)
-    }
-}

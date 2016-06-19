@@ -138,6 +138,35 @@ extension BrowserViewController: UICollectionViewDataSource {
 }
 
 
+// MARK:- 实现
+extension BrowserViewController : DismissProtocol {
+    
+    func getImageView() -> UIImageView {
+        // 1.创建 imageView 对象
+        let imageView = UIImageView()
+        
+        // 2.设置 imageView 的 Image
+        let cell = collectionView.visibleCells().first as! BrowserViewCell
+        imageView.image = cell.imageView.image
+        
+        // 3.设置 imageView 的 frame
+        imageView.frame = cell.imageView.frame
+        
+        // 4.设置 imageView 的属性
+        imageView.contentMode = .ScaleAspectFill
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }
+    
+    func getIndexPath() -> NSIndexPath {
+        // 1.获取正在显示的 Cell
+        let cell = collectionView.visibleCells().first as! BrowserViewCell
+        
+        return collectionView.indexPathForCell(cell)!
+        
+    }
+}
 
 
 
