@@ -58,10 +58,10 @@ extension HomeViewController {
     }
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         // 1.创建 Cell
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCell", forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("HomeCell", forIndexPath: indexPath) as! HomeViewCell
         
         // 2.给 Cell 设置数据
-        cell.backgroundColor = UIColor.redColor()
+        cell.shop = self.shops[indexPath.row]
         
         return cell
     }

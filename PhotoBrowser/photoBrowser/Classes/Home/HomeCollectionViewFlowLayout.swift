@@ -17,16 +17,16 @@ class HomeCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         let margin : CGFloat = 10
         
-        let itemW = (UIScreen.mainScreen().bounds.size.width - margin * 4) / 3
+        let itemWH = (UIScreen.mainScreen().bounds.width - 4 * margin ) / 3
         
-        itemSize = CGSize(width: itemW, height: itemW)
+        itemSize = CGSize(width: itemWH, height: itemWH)
         
         // 设置间距
         minimumLineSpacing = margin
         minimumInteritemSpacing = margin
         
         // 设置内边距
-        collectionView?.contentInset = UIEdgeInsetsMake(margin + 64, margin, margin, margin)
+        collectionView?.contentInset = UIEdgeInsets(top: margin + 64 , left: margin, bottom: margin, right: margin)
     }
 
 }

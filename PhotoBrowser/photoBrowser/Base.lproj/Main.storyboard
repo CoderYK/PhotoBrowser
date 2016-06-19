@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="-836" y="290"/>
         </scene>
-        <!--Home View Controller-->
+        <!--图片浏览器-->
         <scene sceneID="I93-Oj-iYv">
             <objects>
                 <collectionViewController id="Jt3-Bu-XfD" customClass="HomeViewController" customModule="photoBrowser" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,14 +30,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="zTI-dX-V7a" customClass="HomeCollectionViewFlowLayout" customModule="photoBrowser" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HomeCell" reuseIdentifier="HomeCell" id="1vX-zM-dyM">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HomeCell" reuseIdentifier="HomeCell" id="1vX-zM-dyM" customClass="HomeViewCell" customModule="photoBrowser" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="106" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="106" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8DF-km-OLY">
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="108"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="8DF-km-OLY" firstAttribute="top" secondItem="1vX-zM-dyM" secondAttribute="top" id="Jor-Ty-xCb"/>
+                                    <constraint firstItem="8DF-km-OLY" firstAttribute="leading" secondItem="1vX-zM-dyM" secondAttribute="leading" id="Yco-gB-f9n"/>
+                                    <constraint firstAttribute="trailing" secondItem="8DF-km-OLY" secondAttribute="trailing" id="j6d-TP-ARC"/>
+                                    <constraint firstAttribute="bottom" secondItem="8DF-km-OLY" secondAttribute="bottom" id="jvD-EA-3Lz"/>
+                                </constraints>
+                                <size key="customSize" width="106" height="108"/>
+                                <connections>
+                                    <outlet property="imageView" destination="8DF-km-OLY" id="fJt-I0-MYP"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -45,11 +60,11 @@
                             <outlet property="delegate" destination="Jt3-Bu-XfD" id="Nd5-Gn-KfT"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="eFt-Ih-oxa"/>
+                    <navigationItem key="navigationItem" title="图片浏览器" id="eFt-Ih-oxa"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qAb-Tv-nlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-174" y="284"/>
+            <point key="canvasLocation" x="-209" y="290"/>
         </scene>
     </scenes>
 </document>
